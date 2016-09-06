@@ -1,0 +1,21 @@
+{
+  "name": "cherrypipe",
+  "version": "1.0.0",
+  "description": "test for mocha",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mocha"
+  ],
+  "author": "linuxb",
+  "license": "ISC",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha-html-cov-reporter": "^1.0.2",
+    "chai": "^3.5.0",
+    "should": "^11.1.0"
+  }
+}
