@@ -17,7 +17,7 @@ test-cov:
 	@istanbul cover _$(TEST) --timeout=$(TIMEOUT)
 
 
-test-all: test test-cov
+test-all: test-cov
 
 
 

@@ -275,4 +275,37 @@ $ istanbul cover _mocha -- test/db.test.js
 
 注意,mocha的命令前面必须加上下划线,而且mocha命令的参数需要用 -- 隔开,不然会被识别成istanbul的参数。
 
+####集成测试到项目的构建
+
+工程化的项目需要有一个统一的构建系统,在这里*nix环境下采用make构建,windows下采用grunt构建
+
+使用Makefile集成测试
+
+可以在我们的Makefile文件中添加如下代码
+
+```
+COVERDIST = lib-cov
+TIMEOUT = 10000
+TEST = 	mocha
+TESTDIRS = lib
+
+.PHONY: clean test test-cov test-all
+
+clean: 
+	@echo "test clean"
+	@rm -rf ./$(COVERDIST)
+
+test:
+	@$(TEST) --timeout=$(TIMEOUT)
+
+
+test-cov:
+	@istanbul cover _$(TEST) --timeout=$(TIMEOUT)
+
+
+test-all: test-cov
+```
+
+直接运行make的相关命令就可以很方便完成复杂的测试过程。
+
 
