@@ -12,10 +12,33 @@
   "author": "linuxb",
   "license": "ISC",
   "dependencies": {
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "redux": "^3.6.0"
+  },
+  "config": {
+    "blanket": {
+      "pattern": [
+        "lib",
+        "index.js"
+      ],
+      "data-cover-flag": "ignoreError"
+    }
   },
   "devDependencies": {
-    "mocha-html-cov-reporter": "^1.0.2",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "blanket": "^1.2.3",
     "chai": "^3.5.0",
-    "should": "^11.1.0"
+    "css-loader": "^0.25.0",
+    "mocha-html-cov-reporter": "^1.0.2",
+    "should": "^11.1.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2"
   }
 }
