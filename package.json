@@ -37,6 +37,7 @@
     "chai": "^3.5.0",
     "css-loader": "^0.25.0",
     "mocha-html-cov-reporter": "^1.0.2",
+    "muk": "^0.5.2",
     "should": "^11.1.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2"

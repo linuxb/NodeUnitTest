@@ -20,7 +20,7 @@ exports.validate = function (num) {
 };
 ```
 
-然后在我们的项目工程下新建一个 test 目录,在编写测试用例之前我们需要一个断言库来为我们的测试结果断言,mocha并没有集成断言库,我们可以用chai作为断言库<pre>$ npm install --save-dev chai</pre>
+然后在我们的项目工程下新建一个 test 目录,在编写测试用例之前我们需要一个断言库来为我们的测试结果断言,mocha并没有集成断言库,我们可以用should作为断言库<pre>$ npm install --save-dev should</pre>
 
 然后可以这样编写我们的测试用例代码
 
@@ -44,7 +44,7 @@ describe('simple',function () {
 
 ```javascript
 //导入断言库,这里我们用chai的should断言
-const should = require('chai').should();
+const should = require('should');
 //导入待测试的模块
 const simple = require('../lib/simple');
 ```
