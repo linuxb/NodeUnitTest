@@ -3,8 +3,8 @@
  */
 
 //导入断言库,这里我们用chai的should断言
-const should = require('chai').should();
 //导入待测试的模块
+const should = require('should');
 const simple = require('../lib/simple');
 // const util = require('util');
 // console.log(util.inspect(simple));

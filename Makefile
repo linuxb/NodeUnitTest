@@ -10,11 +10,14 @@ clean:
 	@rm -rf ./$(COVERDIST)
 
 test:
-	@$(TEST) --timeout=$(TIMEOUT)
+	@$(TEST) --timeout=$(TIMEOUT) --compilers js:babel-core/register
 
 
 test-cov:
-	@istanbul cover _$(TEST) --timeout=$(TIMEOUT)
+	@istanbul cover _$(TEST) --timeout=$(TIMEOUT) --compilers --js:babel-core/register
+
+joy:
+	@echo "test joy do you like cheery pi"
 
 
 test-all: test-cov

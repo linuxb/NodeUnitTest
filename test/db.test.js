@@ -2,7 +2,6 @@
  * Created by nuxeslin on 16/9/8.
  */
 const should = require('should');
-const chai = require('chai');
 const util = require('util');
 const castle = require('../index');
 
