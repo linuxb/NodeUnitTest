@@ -1,30 +1,48 @@
 /**
  * Created by nuxeslin on 16/9/12.
  */
-// "use strict"
-const sinon = require('sinon');
-const util = require('util');
-const request = require('request');
+const sinon = require('../lib/sinon-async/sinon');
+// const sinon = require('sinon');
 const fs = require('fs');
-// proxy()
 
-function getProfiles() {
-    request.get('localhost',function (err,response,json) {
-        console.log('if fake func can be yield');
-        if(err) console.error(err.stack);
-        console.log(response);
-        console.log(json);
-        fs.readFile('./asynctest',function (err,data) {
-            if(err) console.error(err);
-            console.log(data);
-        })
+/*
+* 如果mock的目标含有闭包,引用外层的作用域,mock后的函数引用已经
+* 切换了父级作用域,无法引用原来的对象,导致promise无法resolve
+* */
+
+let callCount = 0;
+
+function invokePromiseContextify() {
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            fs.readFile('../cherry',(err,data) => {
+                if(err) return reject(err);
+                console.log(`callback call at ${++callCount} times`);
+                resolve(data);
+            });
+        },500);
     });
 };
 
-let fake = sinon.stub(request,'get').yields(null,null,'async_req_proxy').yields().yields(null,null,'cover it');
-sinon.stub(fs,'readFile').yields(null,'test yield async file');
-// console.info(util.inspect(res));
-getProfiles();
-request.get.restore();
-// getProfiles();
-// console.info(util.inspect(proxy.calledOnce));
+const executor = (async() => {
+    let res = await invokePromiseContextify();
+    //this promise will be fulfilled with res
+    console.log('promise fulfilled successful ! ');
+    return res;
+});
+
+let stubProxy = sinon.stub(fs, 'readFile');
+//采用异步的回调注入,调用同步的nextTick,插入event loop,在IO loop之前执行,v8工作线程添加到任务队列,主线程消费
+stubProxy.yields(null,'test async file').setAsyncHook((args) => {
+    console.log(args);
+},{ timeout: 5000} ).yieldsAsyncWithHook(null,'hook invoked');
+executor().then((res) => {
+    console.log(res.toString());
+    //避免函数引用竞争
+    fs.readFile.restore();
+}, reason => {
+    console.log(reason.message);
+    fs.readFile.restore();
+}).catch((ex) => {
+    console.error(ex.message);
+});

@@ -33,10 +33,10 @@ describe('db',function () {
         });
         //this case test reject promise type error
         it('promise will be rejected : type error',function () {
-            return db.find(null).should.be.rejected;
+            return db.find(null).should.be.rejected();
         });
         it('promise will be rejected: not exist user',function () {
-            return db.find('none').should.be.rejected;
+            return db.find('none').should.be.rejected();
         });
     });
 });

@@ -4,6 +4,8 @@
 // require('babel-core/register');
 // require('babel-polyfill');
 
+const logger = require('../lib/commons/logger');
+
 let sleeper = (timeout) => {
     return new Promise((resolve) => {
         setTimeout(() => {
@@ -14,12 +16,12 @@ let sleeper = (timeout) => {
 
 (async () => {
     try {
-        console.log('start to timer sleeping');
+        logger.log('start to timer sleeping');
         await sleeper(3000);
-        console.log('stop');
+        logger.log('stop');
     } catch (ex) {
-        console.error(ex.message);
+        logger.error(ex.message);
     } finally {
-        console.log('finish');
+        logger.log('finish');
     }
 })();

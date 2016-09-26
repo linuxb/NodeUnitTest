@@ -5,7 +5,7 @@ const util = require('util');
 const fs = require('fs');
 const path = require('path');
 
-const experimentPath = path.resolve('/Users/nuxeslin/dev/proxy/webapp/cherryPipe/asynctest');
+const experimentPath = path.resolve('/Users/nuxeslin/dev/proxy/webapp/cherryPipe/cherry');
 fs.readFile(experimentPath,function (err,data) {
     if(err) {
         console.error(err.message);
@@ -15,11 +15,6 @@ fs.readFile(experimentPath,function (err,data) {
 });
 
 exports.invoke = function () {
-    var behavior = function () {
-        return function () {
-            //nothing to do
-        }
-    };
     process.nextTick(function () {
         console.log('finish this event loop phase');
     });

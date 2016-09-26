@@ -1,0 +1,128 @@
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/lib/async.js -----
+Line 4, E:0220: No docs found for member 'exports.query'
+Line 5, E:0005: Illegal tab in whitespace before "setTimeout"
+Line 6, E:0005: Illegal tab in whitespace before "callback.apply"
+Line 7, E:0005: Illegal tab in whitespace before "}"
+Line 10, E:0220: No docs found for member 'exports.queryPromisify'
+Line 11, E:0005: Illegal tab in whitespace before "return"
+Line 12, E:0005: Illegal tab in whitespace before "setTimeout"
+Line 13, E:0005: Illegal tab in whitespace before "}"
+Line 16, E:0220: No docs found for member 'exports.then'
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/lib/cherry.js -----
+Line 1, E:0220: No docs found for member 'exports.validator'
+Line 2, E:0005: Illegal tab in whitespace before "if"
+Line 3, E:0005: Illegal tab in whitespace before "if"
+Line 4, E:0005: Illegal tab in whitespace before "return"
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/lib/class-syntax.js -----
+Line 9, E:-002: Error parsing file at token "<JavaScriptToken: 9, keyword, "default", {}, MetaData(None)>". Unable to check the rest of file.
+Error "Encountered case/default statement without switch statement"
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/lib/db.js -----
+Line 10, E:0220: No docs found for member 'exports.save'
+Line 12, E:0110: Line too long (94 characters).
+Line 22, E:0220: No docs found for member 'exports.find'
+Line 24, E:0110: Line too long (96 characters).
+Line 25, E:0110: Line too long (85 characters).
+Line 27, E:0110: Line too long (97 characters).
+Line 34, E:0220: No docs found for member 'exports.clear'
+Line 38, E:0110: Line too long (96 characters).
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/lib/es6support.js -----
+Line 25, E:-002: Error parsing file at token "<JavaScriptToken: 25, ), ")", {}, MetaData(None)>". Unable to check the rest of file.
+Error "None"
+Line 7, E:0220: No docs found for member 'exports.tryNewSyntax'
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/lib/fs_exception.js -----
+Line 3, E:0220: No docs found for member 'exports.downloadInfo'
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/lib/index.js -----
+Line 7, E:0220: No docs found for member 'exports.cherry'
+Line 8, E:0220: No docs found for member 'exports.async'
+Line 9, E:0220: No docs found for member 'exports.db'
+Line 10, E:0220: No docs found for member 'exports.fsException'
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/lib/simple.js -----
+Line 2, E:0220: No docs found for member 'exports.validate'
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/test/async.test.js -----
+Line 7, E:0002: Missing space after ","
+Line 8, E:0005: Illegal tab in whitespace before "describe"
+Line 8, E:0002: Missing space after ","
+Line 9, E:0005: Illegal tab in whitespace before "it"
+Line 9, E:0002: Missing space after ","
+Line 10, E:0005: Illegal tab in whitespace before "castle.async.query"
+Line 10, E:0002: Missing space after ","
+Line 10, E:0002: Missing space after ","
+Line 10, E:0110: Line too long (82 characters).
+Line 11, E:0005: Illegal tab in whitespace before "should"
+Line 12, E:0005: Illegal tab in whitespace before "if"
+Line 12, E:0002: Missing space before "("
+Line 13, E:0005: Illegal tab in whitespace before "else"
+Line 14, E:0005: Illegal tab in whitespace before "}"
+Line 15, E:0005: Illegal tab in whitespace before "}"
+Line 16, E:0005: Illegal tab in whitespace before "}"
+Line 17, E:0300: File does not end with new line.  (});)
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/test/cherry.test.js -----
+Line 4, E:0002: Missing space after ","
+Line 4, E:0001: Extra space after "function"
+Line 5, E:0005: Illegal tab in whitespace before "describe"
+Line 5, E:0002: Missing space after ","
+Line 6, E:0005: Illegal tab in whitespace before "it"
+Line 6, E:0002: Missing space after ","
+Line 7, E:0005: Illegal tab in whitespace before "castle.cherry.validator"
+Line 8, E:0005: Illegal tab in whitespace before "}"
+Line 9, E:0005: Illegal tab in whitespace before "}"
+Line 10, E:0300: File does not end with new line.  (});)
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/test/class-syntax.test.js -----
+Line 13, E:-002: Error parsing file at token "<JavaScriptToken: 13, }, "}", {}, MetaData(None)>". Unable to check the rest of file.
+Error "None"
+Line 8, E:0002: Missing space after ","
+Line 9, E:0002: Missing space after ","
+Line 10, E:0002: Missing space after ","
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/test/db.test.js -----
+Line 11, E:0002: Missing space after ","
+Line 11, E:0001: Extra space after "function"
+Line 12, E:0002: Missing space after ","
+Line 12, E:0001: Extra space after "function"
+Line 14, E:0001: Extra space after "function"
+Line 17, E:0002: Missing space after ","
+Line 17, E:0001: Extra space after "function"
+Line 19, E:0001: Extra space after "function"
+Line 23, E:0001: Extra space after "function"
+Line 25, E:0001: Extra space after "function"
+Line 27, E:0001: Extra space after "function"
+Line 31, E:0002: Missing space after ","
+Line 31, E:0001: Extra space after "function"
+Line 35, E:0002: Missing space after ","
+Line 35, E:0001: Extra space after "function"
+Line 38, E:0002: Missing space after ","
+Line 38, E:0001: Extra space after "function"
+Line 42, E:0300: File does not end with new line.  (});)
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/test/es6support.test.js -----
+Line 19, E:-002: Error parsing file at token "<JavaScriptToken: 19, }, "}", {}, MetaData(None)>". Unable to check the rest of file.
+Error "None"
+Line 9, E:0002: Missing space after ","
+Line 9, E:0001: Extra space after "function"
+Line 10, E:0002: Missing space after ","
+Line 10, E:0001: Extra space after "function"
+Line 13, E:0002: Missing space after ","
+Line 13, E:0002: Missing space after ","
+Line 16, E:0002: Missing space after ","
+Line 16, E:0002: Missing space after ","
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/test/fs_exception.test.js -----
+Line 27, E:-002: Error parsing file at token "<JavaScriptToken: 27, }, "}", {}, MetaData(None)>". Unable to check the rest of file.
+Error "None"
+Line 13, E:0002: Missing space after ","
+Line 13, E:0001: Extra space after "function"
+Line 14, E:0002: Missing space after ","
+Line 14, E:0001: Extra space after "function"
+Line 18, E:0002: Missing space after ","
+Line 18, E:0002: Missing space after ","
+----- FILE  :  /Users/nuxeslin/dev/proxy/webapp/cherryPipe/test/simple.test.js -----
+Line 14, E:0002: Missing space after ","
+Line 14, E:0001: Extra space after "function"
+Line 16, E:0002: Missing space after ","
+Line 16, E:0001: Extra space after "function"
+Line 18, E:0002: Missing space after ","
+Line 18, E:0001: Extra space after "function"
+Found 101 errors, including 0 new errors, in 15 files (0 files OK).
+
+Some of the errors reported by GJsLint may be auto-fixable using the script
+fixjsstyle. Please double check any changes it makes and report any bugs. The
+script can be run by executing:
+
+fixjsstyle lib/async.js lib/cherry.js lib/class-syntax.js lib/db.js lib/es6support.js lib/fs_exception.js lib/index.js lib/simple.js test/async.test.js test/cherry.test.js test/class-syntax.test.js test/db.test.js test/es6support.test.js test/fs_exception.test.js test/simple.test.js 

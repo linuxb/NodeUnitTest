@@ -2,11 +2,8 @@
  * Created by nuxeslin on 16/9/9.
  */
 const should = require('should');
-const muk = require('muk');
 const fs = require('fs');
 const castle = require('../lib/index');
-//nock for express request mocking
-// const nock = require('nock');
 const util = require('util');
 const sinon = require('sinon');
 
@@ -15,18 +12,17 @@ const fsException = castle.fsException;
 
 describe('fsException',function () {
     describe('#downloadInfo',function () {
-        // var _readFileSync;
-        before(function () {
-            sinon.stub(fs,'readFile').yields(new Error('test error'));
+        before(() => {
+            sinon.stub(fs,'readFile').yields(null,'test read file');
         });
-        after(function () {
+        after(() => {
             fs.readFile.restore();
         });
         it('we should get the right content of mocked file',function () {
-            fsException.downloadInfo(null).should.eventually.equal('test read file');
+            return fsException.downloadInfo('').should.eventually.equal('test read file');
         });
         it('it should be rejected when a error occurs',function () {
-            fsException.downloadInfo(null).should.be.rejected;
+            return fsException.downloadInfo(null).should.be.rejected();
         });
     });
 });
