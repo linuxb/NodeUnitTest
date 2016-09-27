@@ -1,14 +1,16 @@
-## Web App 测试解决方案
-
-@author linuxb
-
 ### Node 单元测试
+
+@author Linuxb
+
 
 ####简单的例子
 
 node单元测试采用mocha为核心测试框架,只需要很简单的配置就可以完成测试
 
-首先安装mocha<pre>$ npm install --global mocha</pre>
+首先安装mocha
+```
+$ npm install --global mocha
+```
 
 比如我们有一个这种模块,导出一个函数,我们需要对这个函数的功能进行测试
 
@@ -20,7 +22,10 @@ exports.validate = function (num) {
 };
 ```
 
-然后在我们的项目工程下新建一个 test 目录,在编写测试用例之前我们需要一个断言库来为我们的测试结果断言,mocha并没有集成断言库,我们可以用should作为断言库<pre>$ npm install --save-dev should</pre>
+然后在我们的项目工程下新建一个 test 目录,在编写测试用例之前我们需要一个断言库来为我们的测试结果断言,mocha并没有集成断言库,我们可以用should作为断言库
+```
+$ npm install --save-dev should
+```
 
 然后可以这样编写我们的测试用例代码
 
@@ -49,7 +54,10 @@ const should = require('should');
 const simple = require('../lib/simple');
 ```
 
-现在只需要在项目的根目录运行mocha就可以了<pre>$ mocha test/simple.test.js</pre>
+现在只需要在项目的根目录运行mocha就可以了
+```
+$ mocha test/simple.test.js
+```
 
 
 ```
@@ -221,14 +229,17 @@ it('promise should be resolved',function () {
         });
         //this case test reject promise type error
         it('promise will be rejected : type error',function () {
-            return db.find(null).should.be.rejected;
+            return db.find(null).should.be.rejected();
         });
         it('promise will be rejected: not exist user',function () {
-            return db.find('none').should.be.rejected;
+            return db.find('none').should.be.rejected();
         });
 ```
 
-然后运行命令<pre>$ mocha  test/db.test.js</pre>
+然后运行命令
+```
+$ mocha  test/db.test.js
+```
 
 ```
   db
@@ -252,8 +263,12 @@ current state in db ...
 
 测试就完成了。
 
+注意一个问题，我们在写promise的断言一定要在it函数里面返回，才能让mocha获取到我们promise的本体，才能去判断它的状态，跟断言的状态进行比较，否则，mocha会当我们在这个用例什么都没干，直接显示这个用例测试通过。
+
 注意,mocha等待异步的时间是有限的,默认为2000ms,超过这个时间还没有通过done来通知就算超时,抛出异常,所以假如我们有超过2000ms的异步操作就需要配置mocha的超时时间,比如有一个操作需要4000ms,可以这样做
-<pre>$ mocha -t 4000 test/db.test.js</pre>
+```
+$ mocha -t 4000 test/db.test.js
+```
 
 ####代码覆盖率计算
 
@@ -263,7 +278,9 @@ current state in db ...
 istanbul的使用很简单
 
 安装istanbul
-<pre>$ npm install --global istanbul</pre>
+```
+$ npm install --global istanbul
+```
 
 在项目根目录运行
 
@@ -274,6 +291,40 @@ $ istanbul cover _mocha -- test/db.test.js
 就可以在项目的coverage子目录下找到html格式的代码测试以及覆盖率报告,在浏览器打开即可。
 
 注意,mocha的命令前面必须加上下划线,而且mocha命令的参数需要用 -- 隔开,不然会被识别成istanbul的参数。
+
+####ES6语法的支持
+
+开发中我们很多都会用到ES6的语法，怎么针对于ES6进行自动化测试呢？
+
+我们可以考虑先用Babel将ES6转码成ES5的代码，再进行计数代码的插装，但我们算出的覆盖率线上的代码的实际覆盖率相差甚远，这是因为转码后的代码没法还原成实际编写的代码，所以计算时需要依赖ES6的AST进行插装而不是ES5的AST，即先对源代码进行语法分析，在AST层面完成插装，再由babel转换成可以在Node执行的代码。
+
+综上，要达到我们的目的，需要满足两个条件：1. 代码能够在Node中正确执行  2. 代码插装器可以生成ES6的AST
+
+要满足第一个条件很简单，先用Babel编译，再送往Node执行就是，可以用 [babel-node](https://www.npmjs.com/package/node-babel "babel-node") 这个工具，点击可以进入文档页
+
+要满足第二个条件，可以考虑两个开源工具： [isparta](https://www.npmjs.com/package/isparta "isparta") 和 [babel-istanbul](https://www.npmjs.com/package/babel-istanbul "babel-istanbul")
+
+第一个工具MacOs环境下使用正常，在Window8.1跟Ubuntu环境下覆盖率无法计算，第二个工具两种环境下都可以进行计算。
+
+所以我们只需要运行命令：
+
+```
+babel-node node_modules/babel-istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --recursive test/*.js
+```
+
+然后在工程的coverage目录下就可找到我们的代码覆盖率报告了~
+
+先看看效果~~
+
+![](https://github.com/linuxb/NodeUnitTest/blob/master/1474468613_62_w608_h399.png?raw=true)
+
+![](https://github.com/linuxb/NodeUnitTest/blob/master/1474468634_73_w432_h339.png?raw=true)
+
+babel-istanbul和mocha也可以通过全局的命令来运行，注意mocha命令需要加上下划线，不然无法获取到编译的结果，为什么会这样呢？
+
+结果也很简单，mocha实际上会fork一个子进程，fork的时候会子进程会共享父进程的堆栈段代码段，这个时候babel可能还没有完成将代码编译放入父进程的进程空间，然而子进程才是mocha的本体，它执行的 ```_mocha``` 的过程，它一旦运行，就在空间上跟父进程独立，这个时候babel将转移的代码放入进程空间如果不通过一些共享内存或者pipe等IPC方法真正运行的mocha进程是不会得到转码后的代码的，所以会得到编译错误，ES6语法无法识别的错误，不少开发者看到一下子还真是一头雾水。
+
+
 
 ####集成测试到项目的构建
 
@@ -286,26 +337,41 @@ $ istanbul cover _mocha -- test/db.test.js
 ```
 COVERDIST = lib-cov
 TIMEOUT = 10000
-TEST = 	mocha
+TEST =  mocha
 TESTDIRS = lib
 
 .PHONY: clean test test-cov test-all
 
 clean: 
-	@echo "test clean"
-	@rm -rf ./$(COVERDIST)
+    @echo "test clean"
+    @rm -rf ./$(COVERDIST)
 
 test:
-	@$(TEST) --timeout=$(TIMEOUT)
+    @$(TEST) --timeout=$(TIMEOUT)
 
 
 test-cov:
-	@istanbul cover _$(TEST) --timeout=$(TIMEOUT)
+    @istanbul cover _$(TEST) --timeout=$(TIMEOUT)
 
 
 test-all: test-cov
 ```
 
 直接运行make的相关命令就可以很方便完成复杂的测试过程。
+
+当然我们也可以通过npm命令执行
+
+```
+"scripts": {
+"test": "babel-node node_modules/babel-istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --recursive test/download.test.js"
+}
+```
+
+我们运行
+```
+$ npm test
+```
+
+就可以完成复杂的自动化测试并完成代码覆盖率的报告
 
 
