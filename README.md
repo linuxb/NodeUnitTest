@@ -316,9 +316,9 @@ babel-node node_modules/babel-istanbul/lib/cli cover node_modules/mocha/bin/_moc
 
 先看看效果~~
 
-![](http://km.oa.com/files/photos/pictures/201609/1474468613_62_w608_h399.png)
+![](https://github.com/linuxb/NodeUnitTest/blob/master/1474468613_62_w608_h399.png?raw=true)
 
-![](http://km.oa.com/files/photos/pictures/201609/1474468634_73_w432_h339.png)
+![](https://github.com/linuxb/NodeUnitTest/blob/master/1474468634_73_w432_h339.png?raw=true)
 
 babel-istanbul和mocha也可以通过全局的命令来运行，注意mocha命令需要加上下划线，不然无法获取到编译的结果，为什么会这样呢？
 
