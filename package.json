@@ -53,6 +53,7 @@
     "should": "^11.1.0",
     "sinon": "^1.17.5",
     "style-loader": "^0.13.1",
+    "text-encoding": "^0.6.1",
     "webpack": "^1.13.2",
     "winston": "^2.2.0"
   }

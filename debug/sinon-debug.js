@@ -1,7 +1,7 @@
 /**
  * Created by nuxeslin on 16/9/12.
  */
-const sinon = require('../lib/sinon-async/sinon');
+const sinon = require('../deps/sinon-async/sinon');
 // const sinon = require('sinon');
 const fs = require('fs');
 
@@ -33,9 +33,9 @@ const executor = (async() => {
 
 let stubProxy = sinon.stub(fs, 'readFile');
 //采用异步的回调注入,调用同步的nextTick,插入event loop,在IO loop之前执行,v8工作线程添加到任务队列,主线程消费
-stubProxy.yields(null,'test async file').setAsyncHook((args) => {
+stubProxy.yields(null,'test async file').setBeforeCallbackHook((args) => {
     console.log(args);
-},{ timeout: 5000} ).yieldsAsyncWithHook(null,'hook invoked');
+},{ timeout: 5000} ).yieldsBeforeCallbackHook(null,'hook invoked');
 executor().then((res) => {
     console.log(res.toString());
     //避免函数引用竞争

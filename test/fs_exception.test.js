@@ -5,7 +5,7 @@ const should = require('should');
 const fs = require('fs');
 const castle = require('../lib/index');
 const util = require('util');
-const sinon = require('sinon');
+const sinon = require('../deps/sinon-async/sinon');
 
 
 const fsException = castle.fsException;
@@ -13,7 +13,9 @@ const fsException = castle.fsException;
 describe('fsException',function () {
     describe('#downloadInfo',function () {
         before(() => {
-            sinon.stub(fs,'readFile').yields(null,'test read file');
+            sinon.stub(fs,'readFile').yields(null,'test read file').setBeforeCallbackHook(() => {
+                //do anything else
+            },{ timeout: 2000 }).yieldsBeforeCallbackHook();
         });
         after(() => {
             fs.readFile.restore();
