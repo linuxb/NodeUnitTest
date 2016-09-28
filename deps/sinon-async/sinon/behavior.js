@@ -193,6 +193,7 @@ var proto = {
         if (!hook || typeof hook !== 'function') throw new TypeError('hook must be a function');
         this.hookProps = {};
         this.callAsyncHook = hook;
+        this.hookProps.promisified = false;
         if (options) {
             extend(this.hookProps,options);
             //expect more behaviors in options
