@@ -1,6 +1,3 @@
-/**
- * Created by nuxeslin on 16/9/7.
- */
 const path = require('path');
 const webpack = require('webpack');
 

@@ -2,20 +2,35 @@
  * Created by nuxeslin on 16/9/19.
  */
 const util = require('util');
-const fs = require('fs');
-const path = require('path');
+const EventEmitter = require('events');
+const logger = require('../lib/commons/logger');
 
-const experimentPath = path.resolve('/Users/nuxeslin/dev/proxy/webapp/cherryPipe/cherry');
-fs.readFile(experimentPath,function (err,data) {
+function MyEmitter() {
+    //initialize the EventEmitter for the listeners queue
+    EventEmitter.call(this);
+    //do something first
+    // this.emit('event_x'); handler can not receive this event because it emitted synchronously when MyEmitter instantiated
+    //it works
+    setImmediate(emitInCallback, this, new Error('temporary error instance to preserve lost call stack'));
+}
+
+function emitInCallback(self, err) {
     if(err) {
-        console.error(err.message);
+        self.emit('error_event');
         return;
     }
-    console.log(data.toString());
+    self.emit('event_x');
+}
+
+util.inherits(MyEmitter, EventEmitter);
+
+let em = new MyEmitter();
+
+em.on('event_x', () => {
+    //but the emitter API is synchronously
+    logger.log('I can receive this asynchronously event ');
 });
 
-exports.invoke = function () {
-    process.nextTick(function () {
-        console.log('finish this event loop phase');
-    });
-}();
+em.on('error_event', () => {
+    logger.log('I can receive this error event ');
+});

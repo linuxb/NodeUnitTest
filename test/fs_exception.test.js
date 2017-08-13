@@ -16,6 +16,7 @@ describe('fsException',function () {
             sinon.stub(fs,'readFile').yields(null,'test read file').setBeforeCallbackHook(() => {
                 //do anything else
             },{ timeout: 2000 }).yieldsBeforeCallbackHook();
+            // sinon.stub(fs,'readFile').yields(null,'test read file');
         });
         after(() => {
             fs.readFile.restore();
